@@ -1,6 +1,6 @@
 pragma solidity ^0.4.17;
 
-import 'Ownable.sol';
+import './Ownable.sol';
 import './CryptoHerosToken.sol';
 
 contract CryptoHerosGame is Ownable {

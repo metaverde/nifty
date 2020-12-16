@@ -1,8 +1,7 @@
-pragma solidity ^0.4.17;
-/** I think the problem with this is going to be the Solidity version... This won't work with the supporting contracts**/
+pragma solidity >=0.6.0 <0.8.0;
 
-import './721.sol';
-import './Oownable.sol';
+import "./721.sol";
+import "./Oownable.sol";
 
 /**
  * @title ERC721TokenMock
@@ -30,19 +29,19 @@ contract CryptoHerosToken is ERC721, Ownable {
   
   mapping(uint256 => Hero) public tokenProperty;
   
-  constructor(string name, string symbol) public
-    ERC721Token(name, symbol)
+  constructor(string name, string symbol) public /**Needs data location "storage" or "memory"**/
+    ERC721(name, symbol)
   { }
 
-  function initImage(string _image) public onlyOwner {
+  function initImage(string _image) public onlyOwner {   /**Needs data location "memory" or "calldata"**/
     images.push(_image);
   }
 
-  function initBackground(string _background) public onlyOwner {
+  function initBackground(string _background) public onlyOwner {  /**Needs data location "memory" or "calldata"**/
     backgrounds.push(_background);
   }
 
-  function initNumberAndDescription(uint _number, string _description) public onlyOwner {
+  function initNumberAndDescription(uint _number, string _description) public onlyOwner {  /**Needs data location "memory" or "calldata"**/
     numbers.push(_number);
     descriptions.push(_description);
   }
@@ -75,7 +74,7 @@ contract CryptoHerosToken is ERC721, Ownable {
   }
 
   function getOwnedTokens(address _owner) external view returns (uint256[]) {
-    return ownedTokens[_owner];
+    return ownedTokens[_owner]; /**undeclared identifier "ownedTokens"**/
   }
 
   function getTokenProperty(uint256 _tokenId) external view returns (uint _number, string _image, string _background, string _description) {
